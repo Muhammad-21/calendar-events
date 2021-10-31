@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router'
 import { privateRoutes, publicRoutes, RouteNames } from '../routes';
 
 export default function AppRouter() {
-    const auth = true;
+    const auth = false;
     return (
         auth
             ?
