@@ -2,21 +2,23 @@ import { Layout, Row, Menu} from 'antd'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { RouteNames } from '../routes';
-
+import { useTypeSeceltor } from '../hooks/useTypedSelector';
+import { useActions } from '../hooks/useActions';
 
 export default function Navbar() {
     const router = useHistory();
-    const auth = false;
+    const {isAuth, user} = useTypeSeceltor(state => state.auth)
+    const {logout} = useActions();
     return (
         <Layout.Header>
             <Row justify="end">
-            {auth 
+            {isAuth 
                 ?
                 <>
-                <div style={{color:'white'}}>Muhammad</div>
+                <div style={{color:'white'}}>Добро пожаловать {user.username}</div>
                 <Menu theme="dark" mode="horizontal" selectable={false}>
                     <Menu.Item 
-                        onClick={() => console.log('Exit')} 
+                        onClick={() => logout()} 
                         key={1}>
                         Выйти
                     </Menu.Item>
@@ -24,13 +26,13 @@ export default function Navbar() {
                 </>
                 :
                 <>
-                    <Menu theme="dark" mode="horizontal" selectable={false}>
-                        <Menu.Item 
-                            onClick={() => router.push(RouteNames.LOGIN)} 
-                            key={1}>
-                            Войти
-                        </Menu.Item>
-                    </Menu>
+                <Menu theme="dark" mode="horizontal" selectable={false}>
+                    <Menu.Item 
+                        onClick={() => router.push(RouteNames.LOGIN)} 
+                        key={1}>
+                        Авторизация
+                    </Menu.Item>
+                </Menu>
                 </>
             }
             </Row>
