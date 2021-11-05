@@ -1,10 +1,17 @@
 import { Button, Layout, Modal, Row } from 'antd'
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EventCalendar from '../components/EventCalendar'
 import EventForm from '../components/EventForm';
+import { useActions } from '../hooks/useActions';
+import { useTypeSeceltor } from '../hooks/useTypedSelector';
 
 export default function Event() {
     const [modalVisible,setModalVisible] = useState(false);
+    const {fetchGuests} = useActions();
+    const {guests} = useTypeSeceltor(state => state.event)
+    useEffect(() => {
+        fetchGuests();
+    }, [])
     return (
         <Layout>
            <EventCalendar events={[]}/>
@@ -17,7 +24,7 @@ export default function Event() {
             footer={null}
             onCancel={()=>setModalVisible(false)}
            >
-               <EventForm/>
+               <EventForm guests={guests}/>
            </Modal>
         </Layout>
     )
