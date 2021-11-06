@@ -8,8 +8,8 @@ export interface iRoute {
 }
 
 export enum RouteNames {
-    LOGIN = '/login',
-    EVENT =  '/',
+    LOGIN = 'https://muhammad-21.github.io/calendar-events/login',
+    EVENT =  'https://muhammad-21.github.io/calendar-events/',
 }
 
 export const publicRoutes : iRoute[] = [
