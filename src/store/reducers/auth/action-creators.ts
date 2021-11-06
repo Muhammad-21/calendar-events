@@ -1,5 +1,5 @@
 import { AppDispatch } from "../..";
-import UserService from "../../../api/UserService";
+import data from "../../../users/users.json";
 import { IUser } from "../../../models/User";
 import { AuthActionEnum, SetAuthAction, SetErrorAction, SetIsLoadingAction, SetUserAction } from "./types";
 
@@ -12,8 +12,7 @@ export const AuthActionCreators = {
         try{
             dispatch(AuthActionCreators.setIsLoading(true));
             setTimeout( async () => {
-                const response = await UserService.getUsers();
-                const mockUser = response.data.find(user => user.username === username && user.password === password)
+                const mockUser = data.find(user => user.username === username && user.password === password)
                 if(mockUser){
                     localStorage.setItem('auth','true');
                     localStorage.setItem('username',mockUser.username);

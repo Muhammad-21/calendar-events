@@ -26,13 +26,13 @@ const EventForm: FC<EventFormProps> = (props) =>{
             </Form.Item>
             <Form.Item
                 wrapperCol={{ offset: 2}}
-                label="Дата события"
-                name="data"
+                label="Выберите гостя"
+                name="guests"
                 rules={[rules.required()]}
             >
                 <Select>
                     {props.guests.map(guest => 
-                        <Select.Option value={guest.username}>{guest.username}</Select.Option>)}
+                        <Select.Option key={guest.username} value={guest.username}>{guest.username}</Select.Option>)}
                 </Select>
             </Form.Item>
             <Row justify="end">
